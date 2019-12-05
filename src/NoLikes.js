@@ -10,7 +10,7 @@ class NoLikes extends Component {
       return (
       	<div>
         	<h3 className = 'movie-title'>{this.getMovieName(this.props.movieID)} </h3>
-			<p> No one liked this movie </p>
+			<p> No one liked this movie. </p>
         </div>
       )
     }

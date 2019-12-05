@@ -99,11 +99,8 @@ const movies = {
   },
 };
 
-// Sees whether a movie has any likes, and then renders output 
-function movieLikeCheck(MovieFavouriters,NoLikes,movieID) {
-  
-  // Tests whether a movie has any likes
-	function wasMovieLiked(movieID) {
+// Tests whether a movie has any likes
+function wasMovieLiked(movieID) {
 		for (const entry of profiles) {
     		if (entry['favoriteMovieID'] === movieID) {
         		return true
@@ -111,7 +108,10 @@ function movieLikeCheck(MovieFavouriters,NoLikes,movieID) {
     	}
   	return false
 	}
-  
+
+// Sees whether a movie has any likes, and then renders output 
+function movieLikeCheck(MovieFavouriters,NoLikes,movieID) {
+  wasMovieLiked(movieID);
   
   if (wasMovieLiked(movieID)) {
   	return <MovieFavouriters profiles = {profiles} users = {users} movieID = {movieID} movies = {movies}/>;
@@ -121,6 +121,16 @@ function movieLikeCheck(MovieFavouriters,NoLikes,movieID) {
   	return <NoLikes profiles = {profiles} users = {users} movieID = {movieID} movies = {movies}/>
   }
 }
+
+// Runs through every movie provided and outputs the correct response  
+function outputAllMovies(MovieFavouriters,NoLikes) {
+  const movieIDArray = Object.keys(movies)
+  movieLikeCheck(MovieFavouriters,NoLikes);
+  
+  for (const entry of movieIDArray) {
+  	movieLikeCheck(MovieFavouriters,NoLikes,entry)
+  }
+}  
   
 class App extends Component {
   render() {
@@ -138,6 +148,7 @@ class App extends Component {
 		{movieLikeCheck(MovieFavouriters,NoLikes,'3')}
         <NoLikes profiles = {profiles} users = {users} movieID = {'3'} movies = {movies}/>
 		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'3'} movies = {movies}/>
+		{outputAllMovies(MovieFavouriters,NoLikes)}
       </div>
     );
   }
