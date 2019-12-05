@@ -16,6 +16,7 @@ class MovieFavouriters extends Component {
     return this.giveArrayEntries(likers) // list of names of who likes a given movie
   }
   
+  // Outputs all the entries in an array as a list in HTML
   giveArrayEntries(Array) {
   	return (
     	<ul>
@@ -24,28 +25,24 @@ class MovieFavouriters extends Component {
     		}
     		)}
     	</ul>
-    )
-  }
+    )}
   
 	getUserNameFromID(ID) {
       return this.props.users[ID]['name']; // Gives the name of a user from their ID
     }
 
+	getMovieName(movieID) {
+  return this.props.movies[movieID]['name']; // Gives the name of a movie from its ID
+	}
+
   render() {   
-    const movieIDs = Object.keys(this.props.movies);
     
     
     return (
       <div>
-      	<h3 className = 'movie-favouriters'>{this.props.movieName} </h3>
+      	<h3 className = 'movie-favouriters'>{this.getMovieName(this.props.movieID)} </h3>
       	<p> Liked by: </p>
-		<p> {this.props.movies[1]['id']} </p>
-		{this.props.movies[1]['id']}
-		{this.giveArrayEntries(movieIDs)}
-		<ul> { movieIDs } </ul>
-		{this.getWhoLikesAMovie('5')}
-		{this.getUserNameFromID('4')}
-		
+		{this.getWhoLikesAMovie(this.props.movieID)}
       </div>
     	
       
