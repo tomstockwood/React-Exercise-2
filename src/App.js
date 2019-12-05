@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MovieFavouriters from './MovieFavouriters.js';
+import NoLikes from './NoLikes.js';
 
 /*
 Display a list of movies where each movie contains a list of users that favorited it.
@@ -98,6 +99,29 @@ const movies = {
   },
 };
 
+// Sees whether a movie has any likes, and then renders output 
+function movieLikeCheck(MovieFavouriters,NoLikes,movieID) {
+  
+  // Tests whether a movie has any likes
+	function wasMovieLiked(movieID) {
+		for (const entry of profiles) {
+    		if (entry['favoriteMovieID'] === movieID) {
+        		return true
+        	}
+    	}
+  	return false
+	}
+  
+  
+  if (wasMovieLiked(movieID)) {
+  	return <MovieFavouriters profiles = {profiles} users = {users} movieID = {movieID} movies = {movies}/>;
+  }
+  
+  else {
+  	return <NoLikes profiles = {profiles} users = {users} movieID = {movieID} movies = {movies}/>
+  }
+}
+  
 class App extends Component {
   render() {
     return (
@@ -108,6 +132,12 @@ class App extends Component {
         </header>
         <h2>How Popular is Your Favorite Movie?</h2>
 		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'1'} movies = {movies}/>
+		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'2'} movies = {movies}/>
+		{movieLikeCheck(MovieFavouriters,NoLikes,'1')}
+        {movieLikeCheck(MovieFavouriters,NoLikes,'2')}
+		{movieLikeCheck(MovieFavouriters,NoLikes,'3')}
+        <NoLikes profiles = {profiles} users = {users} movieID = {'3'} movies = {movies}/>
+		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'3'} movies = {movies}/>
       </div>
     );
   }

@@ -40,7 +40,7 @@ class MovieFavouriters extends Component {
     
     return (
       <div>
-      	<h3 className = 'movie-favouriters'>{this.getMovieName(this.props.movieID)} </h3>
+      	<h3 className = 'movie-title'>{this.getMovieName(this.props.movieID)} </h3>
       	<p> Liked by: </p>
 		{this.getWhoLikesAMovie(this.props.movieID)}
       </div>
