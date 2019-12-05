@@ -2,17 +2,18 @@ import React, { Component} from 'react'
 
 class MovieFavouriters extends Component {
   
-  
-  getWhoLikesAMovie(ID) {
-    let likers = []; // An array where we will store all the user IDs of those who like the movie
+  // Function to identify all users who like a given movie
+  getWhoLikesAMovie(movieID) {
+    let likers = []; // An array where we will store all the usernames of those who like the movie
     
     for (const entry of this.props.profiles) {
-    	if (entry['favoriteMovieID'] === ID) {
-        	likers.push(entry['userID'])
+    	if (entry['favoriteMovieID'] === movieID) {
+        	let username = this.getUserNameFromID(entry['userID']) // Stores the username of the user who likes the movie
+          	likers.push(username)
         
         }
     }
-    return this.giveArrayEntries(likers) // list of ids of who likes a given movie
+    return this.giveArrayEntries(likers) // list of names of who likes a given movie
   }
   
   giveArrayEntries(Array) {
@@ -27,11 +28,11 @@ class MovieFavouriters extends Component {
   }
   
 	getUserNameFromID(ID) {
-      return this.props.users[ID]['name']
+      return this.props.users[ID]['name']; // Gives the name of a user from their ID
     }
 
   render() {   
-    const movieIDs = Object.keys(this.props.movies)
+    const movieIDs = Object.keys(this.props.movies);
     
     
     return (
@@ -43,6 +44,7 @@ class MovieFavouriters extends Component {
 		{this.giveArrayEntries(movieIDs)}
 		<ul> { movieIDs } </ul>
 		{this.getWhoLikesAMovie('5')}
+		{this.getUserNameFromID('4')}
 		
       </div>
     	
