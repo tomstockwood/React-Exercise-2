@@ -17,10 +17,10 @@ class MovieFavouriters extends Component {
   }
   
   // Outputs all the entries in an array as a list in HTML
-  giveArrayEntries(Array) {
+  giveArrayEntries(inputArray) {
   	return (
     	<ul>
-      		{Array.map(function(entry,index){
+      		{inputArray.map(function(entry,index){
     			return <li key = { index }> {entry} </li> //Returns a list of all the entries in a given array
     		}
     		)}

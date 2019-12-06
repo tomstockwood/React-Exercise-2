@@ -127,9 +127,15 @@ function outputAllMovies(MovieFavouriters,NoLikes) {
   const movieIDArray = Object.keys(movies)
   movieLikeCheck(MovieFavouriters,NoLikes);
   
-  for (const entry of movieIDArray) {
-  	movieLikeCheck(MovieFavouriters,NoLikes,entry)
-  }
+  return (
+  	<div>
+    	{movieIDArray.map(function(entry,index){
+    			return <p key = { index }> {movieLikeCheck(MovieFavouriters,NoLikes,entry)} </p> 
+    		}
+    		)}
+    </div>
+  )
+  
 }  
   
 class App extends Component {
@@ -141,13 +147,7 @@ class App extends Component {
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
         <h2>How Popular is Your Favorite Movie?</h2>
-		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'1'} movies = {movies}/>
-		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'2'} movies = {movies}/>
-		{movieLikeCheck(MovieFavouriters,NoLikes,'1')}
-        {movieLikeCheck(MovieFavouriters,NoLikes,'2')}
-		{movieLikeCheck(MovieFavouriters,NoLikes,'3')}
-        <NoLikes profiles = {profiles} users = {users} movieID = {'3'} movies = {movies}/>
-		<MovieFavouriters profiles = {profiles} users = {users} movieID = {'3'} movies = {movies}/>
+		
 		{outputAllMovies(MovieFavouriters,NoLikes)}
       </div>
     );
